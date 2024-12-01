@@ -1,9 +1,15 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
+const { validationResult } = require('express-validator'); // For input validation
 
 // Register a new user
 exports.registerUser  = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { username, password, role } = req.body;
 
     try {
@@ -33,6 +39,11 @@ exports.registerUser  = async (req, res) => {
 
 // Login a user
 exports.loginUser  = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { username, password } = req.body;
 
     try {
@@ -49,7 +60,11 @@ exports.loginUser  = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: user.rows[0].id, username: user.rows[0].username, role: user.rows[0].role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(
+            { id: user.rows[0].id, username: user.rows[0].username, role: user.rows[0].role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
         // Respond with the token
         return res.status(200).json({ token });

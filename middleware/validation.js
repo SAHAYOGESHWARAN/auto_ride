@@ -10,3 +10,8 @@ exports.loginValidation = [
     body('username').isString().withMessage('Username is required'),
     body('password').isString().withMessage('Password is required'),
 ];
+
+exports.requestTripValidation = [
+    body('startLocation').isString().withMessage('Start location is required'),
+    body('endLocation').isString().withMessage('End location is required'),
+];
