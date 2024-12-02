@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const { Client } = require('pg');
 const dotenv = require('dotenv');
-const winston = require('winston'); // For logging
+const winston = require('winston'); 
 
 dotenv.config();
 
