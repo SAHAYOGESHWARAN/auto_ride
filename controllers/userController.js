@@ -66,6 +66,7 @@ exports.loginUser  = async (req, res) => {
             { expiresIn: '1h' }
         );
 
+        
         // Respond with the token
         return res.status(200).json({ token });
     } catch (error) {
