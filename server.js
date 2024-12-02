@@ -2,9 +2,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const tripRoutes = require('./routes/tripRoutes');
-const pool = require('./config/db'); // Import the database connection
-const { handleError } = require('./middleware/errorMiddleware'); // Custom error handling middleware
-const morgan = require('morgan'); // For logging requests
+const pool = require('./config/db'); 
+const { handleError } = require('./middleware/errorMiddleware'); 
+const morgan = require('morgan'); 
 
 dotenv.config();
 const app = express();
@@ -16,10 +16,10 @@ const connectToDatabase = async () => {
     try {
         const client = await pool.connect();
         console.log('Connected to the database successfully');
-        client.release(); // Release the client back to the pool
+        client.release(); 
     } catch (err) {
         console.error('Database connection error:', err.stack);
-        process.exit(1); // Exit the process with failure
+        process.exit(1); 
     }
 };
 
