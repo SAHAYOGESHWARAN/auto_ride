@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
-const { validationResult } = require('express-validator'); // For input validation
+const { validationResult } = require('express-validator'); 
 
 // Register a new user
 exports.registerUser  = async (req, res) => {
@@ -66,7 +66,7 @@ exports.loginUser  = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        
+
         // Respond with the token
         return res.status(200).json({ token });
     } catch (error) {
